@@ -86,7 +86,7 @@ namespace telaDeCadastro
             try
             {
                 cn.Open();
-                string strSQL = "Select cpf from tblCadastro where cpf = " + txtCPF.Text;
+                string strSQL = "Select cpf from tblCadastro where cpf = '" + txtCPF.Text + "'";
                 cmd.Connection = cn;
                 cmd.CommandText = strSQL;
                 dt = cmd.ExecuteReader();
@@ -97,7 +97,10 @@ namespace telaDeCadastro
                 else
                 {
                     if (!dt.IsClosed) { dt.Close(); }
-                    strSQL = "insert into tblCadastro(primeironome, sobrenome, rg, cpf, sexo, escolaridade, profissao, datadenascimento, endereco, telefone)values(@primeironome, @sobrenome, @rg, @cpf, @sexo, @escolaridade, @profissao, @datadenascimento, @endereco, @telefone)"; cmd.Parameters.Add("@primeironome", SqlDbType.NVarChar).Value = txtPrimeiroNome.Text;
+                    cmd.Parameters.Clear();
+
+                    strSQL = "insert into tblCadastro(primeironome, sobrenome, rg, cpf, sexo, escolaridade, profissao, datadenascimento, endereco, telefone)values(@primeironome, @sobrenome, @rg, @cpf, @sexo, @escolaridade, @profissao, @datadenascimento, @endereco, @telefone)"; 
+                    cmd.Parameters.Add("@primeironome", SqlDbType.NVarChar).Value = txtPrimeiroNome.Text;                    
                     cmd.Parameters.Add("@sobrenome", SqlDbType.NVarChar).Value = txtSobrenome.Text;
                     cmd.Parameters.Add("@rg", SqlDbType.NVarChar).Value = txtRG.Text;
                     cmd.Parameters.Add("@cpf", SqlDbType.NVarChar).Value = txtCPF.Text;
