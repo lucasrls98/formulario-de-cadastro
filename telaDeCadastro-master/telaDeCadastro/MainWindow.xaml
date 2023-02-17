@@ -40,6 +40,8 @@
         <Button x:Name="deleteButtonTel" Grid.Column="1" Content="Excluir" HorizontalAlignment="Left" Margin="676,243,0,0" VerticalAlignment="Top" Width="102" Click="deleteButtonTel_Click"/>
         <ListView  x:Name="lstTelefones" Margin="508,278,0,105" Grid.Column="1" HorizontalAlignment="Left" Width="270">
         </ListView>
+        <Button x:Name="cancelButton" Grid.Column="1" Content="Cancelar" HorizontalAlignment="Left" Margin="512,475,0,0" VerticalAlignment="Top" Width="118"/>
+        <Button x:Name="salvarButton" Grid.Column="1" Content="Salvar" HorizontalAlignment="Left" Margin="694,475,0,0" VerticalAlignment="Top" Width="118" Click="saveButton_Click"/>
 
     </Grid>
 </Window>
