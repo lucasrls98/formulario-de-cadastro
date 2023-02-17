@@ -28,7 +28,7 @@
         <Label Content="Data de Nascimento" HorizontalAlignment="Left" Margin="382,138,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="118"/>
         <TextBox x:Name="txtDataNascimento" HorizontalAlignment="Left" Margin="508,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Grid.Column="1" Height="18"/>
         <Label Content="Sexo" HorizontalAlignment="Left" Margin="45,112,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="35"/>
-        <ListView x:Name="lstEnderecos" Grid.Column="1" Margin="85,278,0,105" HorizontalAlignment="Left" Width="315">
+        <ListView x:Name="lstEnderecos" Grid.Column="1" Margin="85,278,0,0" HorizontalAlignment="Left" Width="315" Height="151" VerticalAlignment="Top">
         </ListView>
         <Label Grid.Column="1" Content="Endereço" HorizontalAlignment="Left" Margin="16,210,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtEndereco" Grid.Column="1" Margin="85,214,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Left" Width="315"/>
@@ -38,10 +38,10 @@
         <TextBox x:Name="txtTelefone" Grid.Column="1" HorizontalAlignment="Left" Margin="508,214,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270"/>
         <Button x:Name="addButtonTel" Grid.Column="1" Content="Adicionar" HorizontalAlignment="Left" Margin="508,243,0,0" VerticalAlignment="Top" Width="102" Click="addButtonTel_Click"/>
         <Button x:Name="deleteButtonTel" Grid.Column="1" Content="Excluir" HorizontalAlignment="Left" Margin="676,243,0,0" VerticalAlignment="Top" Width="102" Click="deleteButtonTel_Click"/>
-        <ListView  x:Name="lstTelefones" Margin="508,278,0,105" Grid.Column="1" HorizontalAlignment="Left" Width="270">
+        <ListView  x:Name="lstTelefones" Margin="508,278,0,0" Grid.Column="1" HorizontalAlignment="Left" Width="270" Height="151" VerticalAlignment="Top">
         </ListView>
-        <Button x:Name="cancelButton" Grid.Column="1" Content="Cancelar" HorizontalAlignment="Left" Margin="512,475,0,0" VerticalAlignment="Top" Width="118"/>
-        <Button x:Name="salvarButton" Grid.Column="1" Content="Salvar" HorizontalAlignment="Left" Margin="694,475,0,0" VerticalAlignment="Top" Width="118" Click="saveButton_Click"/>
+        <Button x:Name="cancelButton" Grid.Column="1" Content="Cancelar" HorizontalAlignment="Left" Margin="512,475,0,0" VerticalAlignment="Top" Width="118" Click="cancelButton_Click"/>
+        <Button x:Name="salvarButton" Grid.Column="1" Content="Salvar" HorizontalAlignment="Left" Margin="660,475,0,0" VerticalAlignment="Top" Width="118" Click="saveButton_Click" BorderThickness="1,1,1,1"/>
 
     </Grid>
 </Window>

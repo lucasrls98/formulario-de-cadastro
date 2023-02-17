@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace telaDeCadastro
 {
@@ -27,6 +28,11 @@ namespace telaDeCadastro
         {                   
             InitializeComponent();
         }
+
+        SqlConnection cn= new SqlConnection("Data Source=AVELL\\SQLEXPRESS;Initial Catalog=dadosCadastro;Integrated security=True");
+        SqlCommand cmd = new SqlCommand();
+        SqlDataReader dt;
+
 
         private void addButtonEnd_Click(object sender, RoutedEventArgs e)
         {
@@ -77,32 +83,57 @@ namespace telaDeCadastro
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            SqlConnection conn = new SqlConnection("Data Source=AVELL\\SQLEXPRESS;Initial Catalog=dadosCadastro;Integrated security=True");
-
             try
             {
-                conn.Open();
-
-                foreach (var item in lstEnderecos.Items)
+                cn.Open();
+                string strSQL = "Select cpf from tblCadastro where cpf = " + txtCPF.Text;
+                cmd.Connection = cn;
+                cmd.CommandText = strSQL;
+                dt = cmd.ExecuteReader();
+                if (dt.HasRows)
                 {
-                    string endereco = item.ToString();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO tblUser (endereco) VALUES (@endereco)", conn);
-                    cmd.Parameters.AddWithValue("@endereco", txtEndereco.Text);
-                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("CPF já cadastrado", "Ops", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else
+                {
+                    if (!dt.IsClosed) { dt.Close(); }
+                    strSQL = "insert into tblCadastro(primeironome, sobrenome, rg, cpf, sexo, escolaridade, profissao, datadenascimento, endereco, telefone)values(@primeironome, @sobrenome, @rg, @cpf, @sexo, @escolaridade, @profissao, @datadenascimento, @endereco, @telefone)"; cmd.Parameters.Add("@primeironome", SqlDbType.NVarChar).Value = txtPrimeiroNome.Text;
+                    cmd.Parameters.Add("@sobrenome", SqlDbType.NVarChar).Value = txtSobrenome.Text;
+                    cmd.Parameters.Add("@rg", SqlDbType.NVarChar).Value = txtRG.Text;
+                    cmd.Parameters.Add("@cpf", SqlDbType.NVarChar).Value = txtCPF.Text;
+                    cmd.Parameters.Add("@sexo", SqlDbType.VarChar).Value = txtSexo.Text;
+                    cmd.Parameters.Add("@escolaridade", SqlDbType.NVarChar).Value = txtEscolaridade.Text;
+                    cmd.Parameters.Add("@profissao", SqlDbType.NVarChar).Value = txtProfissao.Text;
+                    cmd.Parameters.Add("@datadenascimento", SqlDbType.NVarChar).Value = txtDataNascimento.Text;
+                    cmd.Parameters.Add("@endereco", SqlDbType.NVarChar).Value = txtEndereco.Text;
+                    cmd.Parameters.Add("@telefone", SqlDbType.NVarChar).Value =txtTelefone.Text;
 
-                MessageBox.Show("Dados salvos com sucesso!");
+
+
+
+
+                    cmd.Connection = cn;
+                    cmd.CommandText = strSQL;
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Dados cadastrados com sucesso!", "dados cadastrados", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    cmd.Parameters.Clear();
+                    cn.Close(); //fechando conexão do sql
+
+                }
             }
-            catch (Exception ex)
+            catch (Exception erro)
             {
-                MessageBox.Show("Erro ao salvar dados: " + ex.Message);
+                MessageBox.Show(erro.Message);
+                cn.Close();
             }
-            finally
-            {
-                conn.Close();
-            }
+            
         }
 
-        
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
